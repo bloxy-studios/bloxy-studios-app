@@ -96,26 +96,23 @@ function StepOne() {
 
       {/* Right Side - Dark Content Area */}
       <div className="relative w-1/2 h-full bg-[#0a0a0a] flex flex-col items-center justify-center px-16 overflow-hidden z-20">
-        <div className="max-w-sm w-full space-y-8">
+        <div className="max-w-sm w-full">
           {/* Title */}
-          <div className="space-y-3">
-            <h1 className="text-2xl font-semibold text-white tracking-tight">
+          <div className="space-y-2 mb-10">
+            <h1 className="text-2xl font-bold text-white">
               Deep integration with local files
             </h1>
-            <p className="text-gray-400 text-base leading-relaxed">
+            <p className="text-muted-foreground text-base leading-relaxed font-semibold">
               Select a workspace and let AI read, analyze, and batch-process everything
             </p>
           </div>
 
           {/* Actions */}
-          <div className="space-y-3 pt-4">
-            <Button
-              variant="outline"
-              className="w-full h-11 rounded-lg border-white/20 bg-transparent text-white hover:bg-white/5 hover:text-white font-medium"
-            >
+          <div className="space-y-4">
+            <Button className="w-full h-10 rounded-md bg-white text-black hover:bg-gray-100 font-medium text-sm">
               Next
             </Button>
-            <button className="w-full text-center text-gray-400 hover:text-white transition-colors text-sm py-2">
+            <button className="w-full text-center text-white font-semibold text-sm py-2">
               Skip
             </button>
           </div>
