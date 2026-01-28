@@ -1,13 +1,22 @@
 {
   "name": "bloxy-studios-app",
   "version": "0.1.0",
+  "description": "Bloxy Studios Desktop App",
+  "author": "Bloxy Studios",
   "private": true,
+  "main": "electron/main.js",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "biome check",
-    "format": "biome format --write"
+    "format": "biome format --write",
+    "electron:dev": "concurrently --kill-others \"cross-env NODE_ENV=development next dev\" \"wait-on http://localhost:3000 && cross-env NODE_ENV=development electron .\"",
+    "electron:build": "next build && electron-builder",
+    "electron:build:mac": "next build && electron-builder --mac",
+    "electron:build:win": "next build && electron-builder --win",
+    "electron:build:linux": "next build && electron-builder --linux",
+    "electron:build:dev": "next build && electron-builder --mac --dir"
   },
   "dependencies": {
     "next": "16.1.6",
@@ -21,14 +30,46 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "babel-plugin-react-compiler": "1.0.0",
+    "concurrently": "^9.2.1",
+    "cross-env": "^10.1.0",
+    "electron": "^40.0.0",
+    "electron-builder": "^26.4.0",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wait-on": "^9.0.3"
+  },
+  "build": {
+    "appId": "com.bloxystudios.app",
+    "productName": "Bloxy Studios",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "electron/**/*",
+      "out/**/*"
+    ],
+    "mac": {
+      "target": "dmg",
+      "category": "public.app-category.developer-tools",
+      "icon": "build/icon.png"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.png"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "build/icon.png"
+    }
   },
   "ignoreScripts": [
     "sharp",
     "unrs-resolver"
   ],
   "trustedDependencies": [
+    "electron",
+    "electron-winstaller",
     "sharp",
     "unrs-resolver"
   ]
